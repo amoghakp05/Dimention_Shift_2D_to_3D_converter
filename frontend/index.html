@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DimensionShift - AI 3D Generation</title>
+    <meta name="description" content="Professional 2D to 3D AI conversion tool.">
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Three.js and dependencies -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Upload Area -->
+        <aside class="sidebar glass-panel" id="sidebar">
+            <header>
+                <div class="header-top">
+                    <h1>Dimension<span>Shift</span></h1>
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle Light/Dark Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                <p>AI-Powered 2D to 3D Conversion</p>
+            </header>
+
+            <div class="upload-zone" id="upload-zone">
+                <div class="upload-content">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p>Drag & Drop an image here</p>
+                    <span>Supports JPG, PNG</span>
+                    <button class="btn btn-outline" id="browse-btn" style="margin-top: 1rem;">
+                        <i class="fa-solid fa-folder-open"></i> Browse Files
+                    </button>
+                    <input type="file" id="file-input" accept="image/png, image/jpeg" hidden>
+                </div>
+            </div>
+
+            <div class="preview-area" id="preview-area" style="display: none;">
+                <img id="image-preview" src="" alt="Image Preview">
+                <button class="btn btn-primary" id="convert-btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generate 3D Model
+                </button>
+                <button class="btn btn-text" id="cancel-btn">Cancel</button>
+            </div>
+
+            <div class="status-area" id="status-area" style="display: none;">
+                <h3 id="status-text"><i class="fa-solid fa-circle-notch fa-spin"></i> Processing...</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <p class="status-detail" id="status-detail">Uploading image...</p>
+            </div>
+
+            <div class="action-area" id="action-area" style="display: none;">
+                <h3 style="color: var(--text-primary);"><i class="fa-solid fa-check-circle" style="color: #10b981;"></i> Generation Complete</h3>
+                <button class="btn btn-primary" id="download-btn">
+                    <i class="fa-solid fa-download"></i> Download .GLB
+                </button>
+                <button class="btn btn-outline" id="new-btn">
+                    <i class="fa-solid fa-plus"></i> Convert Another
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main 3D Viewer Area -->
+        <main class="viewer-container">
+            <!-- Initial Empty State -->
+            <div class="empty-state" id="viewer-empty-state">
+                <i class="fa-solid fa-cube"></i>
+                <h2>Awaiting Model</h2>
+                <p>Upload an image to render in 3D</p>
+            </div>
+
+            <!-- 3D Canvas Container -->
+            <div id="canvas-container"></div>
+            
+            <!-- Viewer Controls Overlay -->
+            <div class="viewer-controls" id="viewer-controls" style="display: none;">
+                <button id="toggle-rotation-btn" title="Toggle Auto-Rotation">
+                    <i class="fa-solid fa-rotate"></i>
+                </button>
+                <button id="reset-camera-btn" title="Reset Camera">
+                    <i class="fa-solid fa-video"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Application Logic -->
+    <script type="module" src="app.js?v=3"></script>
+</body>
+</html>
